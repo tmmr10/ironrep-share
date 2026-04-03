@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tmmr.iron_rep",
+      "sha256_cert_fingerprints": [
+        "FA:D1:55:51:2F:F9:65:88:4A:36:42:AE:2A:05:E8:F5:64:4F:26:8E:FB:36:50:8A:B0:EC:FD:66:E1:DC:A7:3F"
+      ]
+    }
+  }
+]
