@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IronRep</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a; color: #e0e0e0;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 24px;
+  }
+  .card {
+    max-width: 400px; width: 100%; text-align: center;
+    background: #1a1a1a; border-radius: 20px; padding: 40px 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .icon { font-size: 48px; margin-bottom: 16px; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .sub { color: #888; font-size: 14px; margin-bottom: 28px; }
+  .btn {
+    display: inline-block; padding: 14px 32px;
+    background: #c8e64e; color: #000; font-weight: 700; font-size: 16px;
+    border-radius: 14px; text-decoration: none; transition: opacity 0.2s;
+  }
+  .btn:active { opacity: 0.7; }
+  .hint { color: #666; font-size: 12px; margin-top: 20px; line-height: 1.5; }
+  .info { margin: 16px 0 24px; }
+  .info-name { font-size: 18px; font-weight: 600; color: #c8e64e; }
+  .info-meta { color: #888; font-size: 13px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">💪</div>
+  <h1 id="title">IronRep</h1>
+  <div id="details" class="info" style="display:none">
+    <div id="item-name" class="info-name"></div>
+    <div id="item-meta" class="info-meta"></div>
+  </div>
+  <p id="subtitle" class="sub"></p>
+  <a id="open-btn" class="btn" href="#">In IronRep öffnen</a>
+  <p class="hint">
+    Du brauchst die IronRep App.<br>
+    Falls sich nichts öffnet, ist die App noch nicht installiert.
+  </p>
+</div>
+<script>
+  const hash = window.location.hash.slice(1);
+  const isWorkout = hash.startsWith('w:');
+  const encoded = isWorkout ? hash.slice(2) : hash;
+
+  if (encoded) {
+    const scheme = isWorkout ? 'ironrep://workout/' : 'ironrep://plan/';
+    document.getElementById('open-btn').href = scheme + encoded;
+    document.getElementById('title').textContent = isWorkout
+      ? 'IronRep Workout' : 'IronRep Trainingsplan';
+    document.getElementById('subtitle').textContent = isWorkout
+      ? 'Tippe unten, um das Workout in IronRep zu importieren.'
+      : 'Tippe unten, um den Plan in IronRep zu importieren.';
+
+    // Decode and show name
+    try {
+      const raw = atob(encoded.replace(/-/g,'+').replace(/_/g,'/'));
+      const bytes = Uint8Array.from(raw, c => c.charCodeAt(0));
+      const ds = new DecompressionStream('gzip');
+      const writer = ds.writable.getWriter();
+      writer.write(bytes);
+      writer.close();
+      new Response(ds.readable).text().then(json => {
+        const obj = JSON.parse(json);
+        if (obj.n) {
+          document.getElementById('item-name').textContent = obj.n;
+          if (isWorkout) {
+            const parts = [];
+            if (obj.x) parts.push(obj.x.length + ' Übungen');
+            if (obj.d) parts.push(Math.floor(obj.d / 60) + ' min');
+            if (parts.length) {
+              document.getElementById('item-meta').textContent = parts.join(' · ');
+            }
+          } else {
+            if (obj.e) {
+              document.getElementById('item-meta').textContent = obj.e.length + ' Übungen';
+            }
+          }
+          document.getElementById('details').style.display = 'block';
+        }
+      }).catch(() => {});
+    } catch(e) {}
+  } else {
+    document.getElementById('open-btn').style.display = 'none';
+    document.getElementById('subtitle').textContent = 'Kein Code gefunden.';
+  }
+</script>
+</body>
+</html>
