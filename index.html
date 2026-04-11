@@ -6,8 +6,9 @@
 <title>IronRep — Workout Tracker</title>
 <meta name="description" content="IronRep is a clean, focused workout tracker. Track sets, build plans, see your progress. No accounts, no cloud — your data stays on your device.">
 <meta property="og:title" content="IronRep — Workout Tracker">
-<meta property="og:description" content="Track your workouts, beat your PRs, build your perfect plan.">
+<meta property="og:description" content="Track your workouts, beat your PRs, build your perfect training plan.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://tmmr10.github.io/ironrep-share/app-icon.png">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -15,42 +16,107 @@
     background: #0a0a0a; color: #e0e0e0;
     min-height: 100vh; padding: 0;
   }
+
+  /* Hero */
   .hero {
     display: flex; flex-direction: column; align-items: center;
-    justify-content: center; text-align: center;
-    min-height: 100vh; padding: 40px 24px;
+    text-align: center; padding: 80px 24px 48px;
   }
-  .icon { font-size: 64px; margin-bottom: 20px; }
+  .app-icon {
+    width: 120px; height: 120px; border-radius: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(200, 230, 78, 0.15);
+  }
   h1 {
-    font-size: 36px; font-weight: 800; color: #fff;
+    font-size: 40px; font-weight: 800; color: #fff;
     letter-spacing: 1px; margin-bottom: 8px;
   }
-  .tagline {
-    font-size: 16px; color: #888; margin-bottom: 36px;
-    max-width: 400px; line-height: 1.5;
+  .subtitle {
+    font-size: 18px; color: #c8e64e; font-weight: 600;
+    margin-bottom: 16px;
   }
-  .stores { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+  .tagline {
+    font-size: 16px; color: #888; margin-bottom: 40px;
+    max-width: 520px; line-height: 1.6;
+  }
+
+  /* Store Buttons */
+  .stores { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 64px; }
   .store-btn {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 24px; border-radius: 14px;
-    background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
-    color: #fff; text-decoration: none; font-size: 15px; font-weight: 600;
-    transition: background 0.2s, border-color 0.2s;
+    padding: 14px 28px; border-radius: 14px;
+    background: #c8e64e; border: none;
+    color: #000; text-decoration: none; font-size: 15px; font-weight: 700;
+    transition: opacity 0.2s, transform 0.2s;
   }
-  .store-btn:hover { background: #222; border-color: rgba(255,255,255,0.2); }
-  .store-btn svg { width: 22px; height: 22px; fill: #fff; }
+  .store-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .store-btn:active { transform: translateY(0); }
+  .store-btn svg { width: 20px; height: 20px; fill: #000; }
+  .store-btn.secondary {
+    background: #1a1a1a; border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+  }
+  .store-btn.secondary svg { fill: #fff; }
+  .store-btn.secondary:hover { background: #222; border-color: rgba(255,255,255,0.2); }
+
+  /* Features */
+  .section-title {
+    font-size: 13px; font-weight: 700; color: #c8e64e;
+    text-transform: uppercase; letter-spacing: 3px;
+    margin-bottom: 32px; text-align: center;
+  }
   .features {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    max-width: 480px; margin-bottom: 48px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+    max-width: 720px; margin: 0 auto 64px; padding: 0 24px;
   }
   .feature {
-    background: #1a1a1a; border-radius: 14px; padding: 20px 16px;
+    background: #111; border-radius: 16px; padding: 24px 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: border-color 0.2s;
+  }
+  .feature:hover { border-color: rgba(200, 230, 78, 0.2); }
+  .feature-icon { font-size: 28px; margin-bottom: 12px; }
+  .feature h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .feature p { font-size: 13px; color: #888; line-height: 1.5; }
+
+  /* Highlights */
+  .highlights {
+    max-width: 720px; margin: 0 auto 64px; padding: 0 24px;
+  }
+  .highlight-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .highlight {
+    background: #111; border-radius: 16px; padding: 28px 24px;
     border: 1px solid rgba(255,255,255,0.06);
   }
-  .feature-icon { font-size: 24px; margin-bottom: 8px; }
-  .feature h3 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .feature p { font-size: 12px; color: #888; line-height: 1.4; }
-  .links { display: flex; gap: 24px; margin-bottom: 24px; }
+  .highlight h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .highlight p { font-size: 14px; color: #888; line-height: 1.6; }
+  .highlight .accent { color: #c8e64e; }
+
+  /* Privacy Banner */
+  .privacy-banner {
+    max-width: 720px; margin: 0 auto 64px; padding: 0 24px;
+  }
+  .privacy-banner-inner {
+    background: linear-gradient(135deg, #111 0%, #0d0d0d 100%);
+    border: 1px solid rgba(200, 230, 78, 0.15);
+    border-radius: 16px; padding: 32px;
+    text-align: center;
+  }
+  .privacy-banner-inner h3 {
+    font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px;
+  }
+  .privacy-banner-inner p {
+    font-size: 14px; color: #888; line-height: 1.6; max-width: 480px; margin: 0 auto;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 32px 24px 48px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
   .links a {
     color: #c8e64e; text-decoration: none; font-size: 14px;
     border-bottom: 1px solid transparent; transition: border-color 0.2s;
@@ -59,61 +125,116 @@
   .contact { color: #555; font-size: 13px; }
   .contact a { color: #888; text-decoration: none; }
   .contact a:hover { color: #c8e64e; }
-  @media (max-width: 480px) {
-    h1 { font-size: 28px; }
-    .features { grid-template-columns: 1fr; max-width: 320px; }
+  .copyright { color: #333; font-size: 12px; margin-top: 12px; }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    h1 { font-size: 32px; }
+    .features { grid-template-columns: 1fr; max-width: 400px; }
+    .highlight-grid { grid-template-columns: 1fr; }
     .stores { flex-direction: column; align-items: center; }
+    .hero { padding: 48px 24px 36px; }
   }
 </style>
 </head>
 <body>
+
+<!-- Hero -->
 <div class="hero">
-  <div class="icon">💪</div>
+  <img src="app-icon.png" alt="IronRep App Icon" class="app-icon">
   <h1>IronRep</h1>
-  <p class="tagline">A clean, focused workout tracker. Track your sets, build training plans, and watch your strength grow — all on your device.</p>
+  <p class="subtitle">Workout Tracker</p>
+  <p class="tagline">A clean, focused workout tracker built for people who actually lift. Track every set, build your perfect training plan, and watch your strength grow over time — all stored locally on your device.</p>
 
   <div class="stores">
     <a class="store-btn" href="https://apps.apple.com/app/ironrep/id6760623238">
       <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       App Store
     </a>
-    <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.tmmr.iron_rep">
+    <a class="store-btn secondary" href="https://play.google.com/store/apps/details?id=com.tmmr.iron_rep">
       <svg viewBox="0 0 24 24"><path d="M3.18 23.27c-.36-.17-.58-.53-.58-.93V1.67c0-.4.22-.76.58-.93l11.83 11.27L3.18 23.27zM16.02 13l2.43 2.32 3.35-1.93c.41-.24.41-.83 0-1.07l-3.35-1.93L16.02 13zm-1-1L4.35.72l12.1 6.94L15.02 12zM4.35 23.28 15.02 14l1.43 4.35-12.1 6.93z"/></svg>
       Google Play
     </a>
   </div>
+</div>
 
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">📊</div>
-      <h3>Track Every Set</h3>
-      <p>Log weight, reps, and set type. IronRep remembers your last performance.</p>
+<!-- Features -->
+<p class="section-title">Features</p>
+<div class="features">
+  <div class="feature">
+    <div class="feature-icon">&#9878;&#65039;</div>
+    <h3>Track Every Set</h3>
+    <p>Log weight, reps, and set type for every exercise. IronRep remembers your last performance so you always know what to beat.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">&#128203;</div>
+    <h3>Custom Plans</h3>
+    <p>Build training plans with 50+ exercises across every muscle group. Drag to reorder, set target sets, and start with one tap.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">&#128200;</div>
+    <h3>Strength Charts</h3>
+    <p>Watch your progress with clear charts for every exercise. Track personal records, volume, and workout streaks over time.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">&#9201;</div>
+    <h3>Guided Mode</h3>
+    <p>Step through each exercise with the guided workout mode. Built-in rest timer keeps you on track between sets.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">&#128279;</div>
+    <h3>Share Plans</h3>
+    <p>Share your training plans and workouts with friends via a simple link or file. They can import it with one tap.</p>
+  </div>
+  <div class="feature">
+    <div class="feature-icon">&#127760;</div>
+    <h3>Two Languages</h3>
+    <p>Full support for German and English. Exercise names, UI, and all content — in your preferred language.</p>
+  </div>
+</div>
+
+<!-- Highlights -->
+<div class="highlights">
+  <p class="section-title">Why IronRep</p>
+  <div class="highlight-grid">
+    <div class="highlight">
+      <h3>Your Data Stays <span class="accent">Yours</span></h3>
+      <p>No account required. No cloud sync. No analytics. All your workouts, plans, and records are stored locally on your device. Uninstall the app, and everything is gone — because we never had it in the first place.</p>
     </div>
-    <div class="feature">
-      <div class="feature-icon">📋</div>
-      <h3>Build Plans</h3>
-      <p>Create custom training plans with 50+ exercises. Share them with friends.</p>
+    <div class="highlight">
+      <h3>Built for <span class="accent">Lifters</span></h3>
+      <p>No social feeds. No AI coaches. No gamification. IronRep is a straightforward workout log for people who want to track their training and get stronger — nothing more, nothing less.</p>
     </div>
-    <div class="feature">
-      <div class="feature-icon">📈</div>
-      <h3>See Progress</h3>
-      <p>Strength charts, personal records, streaks, and volume tracking.</p>
+    <div class="highlight">
+      <h3>One-Time <span class="accent">Purchase</span></h3>
+      <p>IronRep is free with ads. Want them gone? A single in-app purchase removes ads forever. No subscriptions, no recurring fees. Pay once, train in peace.</p>
     </div>
-    <div class="feature">
-      <div class="feature-icon">🔒</div>
-      <h3>Privacy First</h3>
-      <p>All data stays on your device. No accounts, no cloud, no tracking.</p>
+    <div class="highlight">
+      <h3>Available <span class="accent">Everywhere</span></h3>
+      <p>IronRep runs on iPhone, iPad, and Android. Your workout history, personal records, and training plans — always in your pocket, ready when you are.</p>
     </div>
   </div>
+</div>
 
+<!-- Privacy Banner -->
+<div class="privacy-banner">
+  <div class="privacy-banner-inner">
+    <h3>Privacy by Design</h3>
+    <p>IronRep does not collect, store, or transmit any personal data to external servers. No Firebase. No Mixpanel. No tracking of any kind. Your training data exists only on your device.</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
   <div class="links">
     <a href="privacy.html">Privacy Policy</a>
     <a href="terms.html">Terms of Service</a>
   </div>
-
   <p class="contact">
     Contact: <a href="mailto:turnonandroiddeveloper@gmail.com">turnonandroiddeveloper@gmail.com</a>
   </p>
-</div>
+  <p class="copyright">&copy; 2026 tmmr. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
