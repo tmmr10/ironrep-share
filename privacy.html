@@ -25,7 +25,7 @@
 <body>
   <h1>IRONREP</h1>
   <h2>Privacy Policy</h2>
-  <p class="date">Last updated: March 16, 2026</p>
+  <p class="date">Last updated: August 10, 2026</p>
 
   <h2>Overview</h2>
   <p>IronRep is a workout tracking app developed by tmmr. We respect your privacy and are committed to transparency about data practices.</p>
@@ -38,6 +38,17 @@
     <li>Workout history including weights, reps, and sets</li>
     <li>Settings (weight unit, theme, rest timer)</li>
     <li>Custom exercise photos</li>
+    <li>Gym names and their approximate coordinates (see “Location” below)</li>
+  </ul>
+
+  <h2>Location</h2>
+  <p>If you train at more than one gym, IronRep can tell them apart so that weights and records stay separated per location. This is optional: the app asks for permission only when you add a second gym, and everything keeps working without it — you then switch gyms manually.</p>
+  <ul>
+    <li><strong>Approximate location only.</strong> IronRep requests coarse location (Android: <code>ACCESS_COARSE_LOCATION</code>; iOS: “When In Use”). It never requests precise, background or always-on location, and does no geofencing.</li>
+    <li><strong>Only while you use the app.</strong> Your position is read when you finish a workout and when you start one — never in the background.</li>
+    <li><strong>A gym’s coordinates are learned, not entered.</strong> Finishing a workout at a gym adds one sample to its running average. Manually added, imported, duplicated and shared workouts are excluded.</li>
+    <li><strong>Nothing leaves your device.</strong> Coordinates are stored in the local database, are not transmitted anywhere, and are not linked to you or any identifier. They are included in a backup you create yourself, so a device change does not start over.</li>
+    <li><strong>Removable at any time.</strong> Deleting a gym deletes its coordinates with it, and permission can be withdrawn in your device settings.</li>
   </ul>
 
   <h2>Advertising</h2>
@@ -45,6 +56,14 @@
 
   <h2>Plan Sharing</h2>
   <p>When you share a training plan, exercise data (names, sets) is encoded into a link. This link does not contain any personal information.</p>
+
+  <h2>Health Data (Apple Health &amp; Health Connect)</h2>
+  <p>IronRep can optionally integrate with Apple Health (iOS) or Health Connect (Android). This integration is entirely opt-in. When enabled, IronRep may:</p>
+  <ul>
+    <li><strong>Write to Health:</strong> completed workouts (type, start and end time, duration, estimated calories) and body weight entries you record in IronRep.</li>
+    <li><strong>Read from Health:</strong> body weight samples, so you don't have to enter them twice.</li>
+  </ul>
+  <p>Health data stays on your device and is handled by the operating system's secure health store. IronRep does not transmit your health data to any external server. You can revoke access at any time in your device's Health settings (iOS: "Settings &gt; Apple Health &gt; Data Access &amp; Devices &gt; IronRep"; Android: Health Connect app). Health data is never shared with advertising, analytics or any third party.</p>
 
   <h2>In-App Purchases</h2>
   <p>IronRep offers a one-time in-app purchase to remove ads. Purchases are processed by Apple (App Store) or Google (Google Play). We do not have access to your payment information.</p>
